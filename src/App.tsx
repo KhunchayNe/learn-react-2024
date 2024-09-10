@@ -1,34 +1,56 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import MyButton from './components/myButton'
+import MyProfile from './components/MyProfile'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [isTrue, setTrue] = useState(false)
+
+  const user = {
+    name: 'Hedy Lamarr',
+    imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
+    imageSize: 90,
+  };
+
+  const products = [
+    { title: 'Cabbage', id: 1 },
+    { title: 'Garlic', id: 2 },
+    { title: 'Apple', id: 3 },
+  ];
+
+  function handleIncreaseClick() {
+    setCount(count + 1)
+  }
+
+  function handleDecreaseClick() {
+    setCount(count - 1)
+  }
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <MyProfile data={user} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      <>
+        <MyButton />
+      </>
+
+      <div>
+        <button onClick={() => setCount((count) => count + 1)}>count is: {count}</button></div>
+
+      <button onClick={() => setTrue((isTrue) => !isTrue)}>isTrue is: {isTrue.toString()}</button>
+      <div>
+        <ul>
+          {products.map((product) => (
+            <li key={product.id}>{product.title}</li>
+          ))}
+        </ul>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <button onClick={handleIncreaseClick}>Increase +</button>
+      <button onClick={handleDecreaseClick}>Decrease -</button>
+      </>
   )
 }
 
